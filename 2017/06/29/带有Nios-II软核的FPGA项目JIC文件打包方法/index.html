@@ -3,15 +3,25 @@
 <head>
     <meta charset="utf-8">
     
-    <title>About | Jason&#39;s Blog</title>
+    <title>带有Nios II软核的FPGA项目Jic文件打包方法 | Jason&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="About">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+    <meta name="description" content="将.sof文件和.elf文件复制到同一文件夹下，如d:/bin  编辑nios脚本程序 build.sh  12345678$ sofFile=&quot;firmware.sof&quot;$ elfFile=&quot;app.elf&quot;$ $ echo &quot;sof&amp;gt;flash …&quot;; sof2flash --epcs --input=$sofFile --output=sof.flash --quiet$ echo">
+<meta name="keywords" content="FPGA,Nios II">
+<meta property="og:type" content="article">
+<meta property="og:title" content="带有Nios II软核的FPGA项目Jic文件打包方法">
+<meta property="og:url" content="http://yoursite.com/2017/06/29/带有Nios-II软核的FPGA项目JIC文件打包方法/index.html">
 <meta property="og:site_name" content="Jason&#39;s Blog">
-<meta property="og:updated_time" content="2017-06-28T05:45:05.973Z">
+<meta property="og:description" content="将.sof文件和.elf文件复制到同一文件夹下，如d:/bin  编辑nios脚本程序 build.sh  12345678$ sofFile=&quot;firmware.sof&quot;$ elfFile=&quot;app.elf&quot;$ $ echo &quot;sof&amp;gt;flash …&quot;; sof2flash --epcs --input=$sofFile --output=sof.flash --quiet$ echo">
+<meta property="og:image" content="http://osb8r9ub4.bkt.clouddn.com/FPGA/blog1/1.png">
+<meta property="og:image" content="http://osb8r9ub4.bkt.clouddn.com/FPGA/blog1/2.png">
+<meta property="og:image" content="http://osb8r9ub4.bkt.clouddn.com/FPGA/blog1/3.png">
+<meta property="og:image" content="http://osb8r9ub4.bkt.clouddn.com/FPGA/blog1/4.png">
+<meta property="og:image" content="http://osb8r9ub4.bkt.clouddn.com/FPGA/blog1/5.png">
+<meta property="og:updated_time" content="2017-06-29T14:58:58.138Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About">
+<meta name="twitter:title" content="带有Nios II软核的FPGA项目Jic文件打包方法">
+<meta name="twitter:description" content="将.sof文件和.elf文件复制到同一文件夹下，如d:/bin  编辑nios脚本程序 build.sh  12345678$ sofFile=&quot;firmware.sof&quot;$ elfFile=&quot;app.elf&quot;$ $ echo &quot;sof&amp;gt;flash …&quot;; sof2flash --epcs --input=$sofFile --output=sof.flash --quiet$ echo">
+<meta name="twitter:image" content="http://osb8r9ub4.bkt.clouddn.com/FPGA/blog1/1.png">
     
 
     
@@ -194,7 +204,7 @@
 </aside>
 
             
-            <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-带有Nios-II软核的FPGA项目JIC文件打包方法" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -202,10 +212,34 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            About
+            带有Nios II软核的FPGA项目Jic文件打包方法
         </h1>
     
 
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/06/29/带有Nios-II软核的FPGA项目JIC文件打包方法/">
+            <time datetime="2017-06-29T12:55:05.000Z" itemprop="datePublished">2017-06-29</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/FPGA/">FPGA</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/FPGA/">FPGA</a>, <a class="tag-link" href="/tags/Nios-II/">Nios II</a>
+    </div>
+
+                    </div>
                 
             </header>
         
@@ -213,7 +247,31 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            
+            <ol>
+<li><strong>将.sof文件和.elf文件复制到同一文件夹下，如d:/bin</strong><br> <img src="http://osb8r9ub4.bkt.clouddn.com/FPGA/blog1/1.png" alt=""></li>
+<li><p><strong>编辑nios脚本程序 build.sh</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ sofFile=<span class="string">"firmware.sof"</span></div><div class="line">$ elfFile=<span class="string">"app.elf"</span></div><div class="line">$ </div><div class="line">$ <span class="built_in">echo</span> <span class="string">"sof&gt;flash …"</span>; sof2flash --epcs --input=<span class="variable">$sofFile</span> --output=sof.flash --quiet</div><div class="line">$ <span class="built_in">echo</span> <span class="string">"elf&gt;flash …"</span>; elf2flash --epcs --after=sof.flash --input=<span class="variable">$elfFile</span> --output=elf.flash</div><div class="line">$ <span class="built_in">echo</span> <span class="string">"cat flash …"</span>; cat elf.flash &gt;&gt; sof.flash</div><div class="line">$ <span class="built_in">echo</span> <span class="string">"flash&gt;hex …"</span>; nios2-elf-objcopy --input-target srec --output-target ihex sof.flash sof_elf.hex</div><div class="line">$ <span class="built_in">echo</span> <span class="string">"del flash …"</span>; rm -f *.flash</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>生成Hex文件</strong><br> 运行Nios II Command Shell<br> 跳转至上述文路径，如 d:/bin</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> d:/bin</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>运行 build.sh在当前文件夹下生成.hex文件</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ./build.sh</div></pre></td></tr></table></figure>
+<p> <img src="http://osb8r9ub4.bkt.clouddn.com/FPGA/blog1/2.png" alt=""><br> <img src="http://osb8r9ub4.bkt.clouddn.com/FPGA/blog1/3.png" alt=""></p>
+</li>
+<li><p><strong>上述命令生成的sof_elf.hex转换成.jic文件</strong></p>
+<ul>
+<li>在Quartus®软件中，open File &gt; Convert Programming Files &gt; Set the programming file as JTAG Indirect Configuration File (.jic). </li>
+<li>在配置下拉菜单中选择合适大小的EPCS器件</li>
+<li>命名你的输出.jic 文件</li>
+<li>点击Flash Loader的下面，在右边选择Add Device，从列表中选择你的FPGA器件</li>
+<li>选中Sof Page , Remove</li>
+<li>点击Add Hex data，选择Relative addressing，选择上面生成的.hex 文件</li>
+<li>点击Generate可看到目标路径下生成了.jic文件。<br><img src="http://osb8r9ub4.bkt.clouddn.com/FPGA/blog1/4.png" alt=""><br><img src="http://osb8r9ub4.bkt.clouddn.com/FPGA/blog1/5.png" alt=""></li>
+</ul>
+</li>
+</ol>
+
         
         </div>
         <footer class="article-footer">
@@ -223,7 +281,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/about/index.html" data-id="cj4iouwqo0001rwtb1p2n80ak" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/2017/06/29/带有Nios-II软核的FPGA项目JIC文件打包方法/" data-id="cj4iouwqj0000rwtbdud83ao0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -291,13 +349,23 @@
 
             
     
-        <a href="http://yoursite.com/about/index.html#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/about/index.html">评论</a>
+        <a href="http://yoursite.com/2017/06/29/带有Nios-II软核的FPGA项目JIC文件打包方法/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2017/06/29/带有Nios-II软核的FPGA项目JIC文件打包方法/">评论</a>
     
 
         </footer>
     </div>
     
         
+<nav id="article-nav">
+    
+    
+        <a href="/2017/06/28/My First FPGA Blog/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">My First FPGA Blog</div>
+        </a>
+    
+</nav>
+
 
     
 </article>
@@ -455,9 +523,9 @@
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'http://yoursite.com/about/index.html';
+            this.page.url = 'http://yoursite.com/2017/06/29/带有Nios-II软核的FPGA项目JIC文件打包方法/';
         
-        this.page.identifier = 'undefined';
+        this.page.identifier = '带有Nios-II软核的FPGA项目JIC文件打包方法';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
